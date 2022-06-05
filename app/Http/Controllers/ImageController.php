@@ -27,6 +27,27 @@ class ImageController extends Controller
 
     public function store(ImageRequest $request)
     {
-        dd($request->validated());
+        Image::create($request->getData());
+
+        return redirect()->route('images.index')->with('message', "Image has been uploaded successfully");
+    }
+
+    public function edit(Image $image)
+    {
+        return view('image.edit', compact('image'));
+    }
+
+    public function update(Image $image, ImageRequest $request)
+    {
+        $image->update($request->getData());
+
+        return redirect()->route('images.index')->with('message', "Image has been updated successfully");
+    }
+
+    public function destroy(Image $image)
+    {
+        $image->delete();
+
+        return redirect()->route('images.index')->with('message', "Image has been removed successfully");
     }
 }
