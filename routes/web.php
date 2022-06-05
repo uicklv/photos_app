@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\ImageController::class, 'index'])->name('images.index');
+Route::get('/images/{image}', [\App\Http\Controllers\ImageController::class, 'show'])->name('images.show');
+Route::get('/images', [\App\Http\Controllers\ImageController::class, 'create'])->name('images.create');
+Route::post('/images', [\App\Http\Controllers\ImageController::class, 'store'])->name('images.store');
