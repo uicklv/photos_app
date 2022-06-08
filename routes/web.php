@@ -20,3 +20,6 @@ Route::post('/images', [\App\Http\Controllers\ImageController::class, 'store'])-
 Route::get('/images/{image}/edit', [\App\Http\Controllers\ImageController::class, 'edit'])->name('images.edit');
 Route::put('/images/{image}', [\App\Http\Controllers\ImageController::class, 'update'])->name('images.update');
 Route::delete('/images/{image}', [\App\Http\Controllers\ImageController::class, 'destroy'])->name('images.destroy');
+
+
+Route::view('test-blade', 'test');
