@@ -40,7 +40,7 @@ class ImageRequest extends FormRequest
     {
         $data = $this->validated() +
             [
-                'user_id' => 1 //$this->user()->id
+                'user_id' => $this->user()->id
             ];
         if ($this->hasFile('file'))
         {

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Session\Store;
@@ -42,6 +43,14 @@ class Image extends Model
     public function scopePublished($query)
     {
         return $query->where('is_published', true);
+    }
+
+    public function scopeVisibleFor($query, User $user)
+    {
+        if ($user->role === Role::Admin || $user->role === Role::Editor) {
+            return;
+        }
+        $query->where("user_id", $user->id);
     }
 
     public function fileUrl()
