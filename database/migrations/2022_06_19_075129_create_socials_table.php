@@ -20,6 +20,7 @@ class CreateSocialsTable extends Migration
             $table->string('twitter')->nullable();
             $table->string('website')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->unique('user_id');
             $table->timestamps();
         });
     }
