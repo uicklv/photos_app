@@ -43,10 +43,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    /**
-     * @var mixed
-     */
 
+    public function updateSettings($data)
+    {
+        $this->updateSocialProfile($data['social']);
+    }
+
+    public function updateSocialProfile($social)
+    {
+       Social::updateOrCreate(
+           ['user_id' => $this->id],
+           $social
+       );
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function images()
     {
         return $this->hasMany(Image::class);
@@ -55,6 +68,23 @@ class User extends Authenticatable
     public function social()
     {
         return $this->hasOne(Social::class)->withDefault();
+    }
+
+    public function setting()
+    {
+        return $this->hasOne(Setting::class)->withDefault();
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->setting()->create([
+                "email_notification" => [
+                    "new_comment" => 1,
+                    "new_image" => 1,
+                ]
+            ]);
+        });
     }
 
     public function getImagesCount()

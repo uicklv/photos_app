@@ -18,15 +18,9 @@ Auth::routes();
 
 Route::get('/', \App\Http\Controllers\ListImageController::class)->name('images.all');
 Route::get('/images/{image}', \App\Http\Controllers\ShowImageController::class)->name('images.show');
-//Route::get('/images', [\App\Http\Controllers\ImageController::class, 'index'])->name('images.index');
-//Route::get('/images/create', [\App\Http\Controllers\ImageController::class, 'create'])->name('images.create');
-//Route::post('/images', [\App\Http\Controllers\ImageController::class, 'store'])->name('images.store');
-//Route::get('/images/{image}/edit', [\App\Http\Controllers\ImageController::class, 'edit'])->name('images.edit');
-////    ->can('update,image');
-//Route::put('/images/{image}', [\App\Http\Controllers\ImageController::class, 'update'])->name('images.update');
-//Route::delete('/images/{image}', [\App\Http\Controllers\ImageController::class, 'destroy'])->name('images.destroy');
-
 Route::resource('/account/images', \App\Http\Controllers\ImageController::class)->except('show');
+Route::get('/account/settings', [\App\Http\Controllers\SettingController::class, 'edit'])->name('settings.edit');
+Route::put('/account/settings', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
 
 
 Route::view('test-blade', 'test');
