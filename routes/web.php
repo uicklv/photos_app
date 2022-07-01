@@ -18,6 +18,7 @@ Auth::routes();
 
 Route::get('/', \App\Http\Controllers\ListImageController::class)->name('images.all');
 Route::get('/images/{image}', \App\Http\Controllers\ShowImageController::class)->name('images.show');
+Route::get('/@{user:username}', \App\Http\Controllers\ShowAuthorController::class)->name('author.show');
 Route::resource('/account/images', \App\Http\Controllers\ImageController::class)->except('show');
 Route::get('/account/settings', [\App\Http\Controllers\SettingController::class, 'edit'])->name('settings.edit');
 Route::put('/account/settings', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
